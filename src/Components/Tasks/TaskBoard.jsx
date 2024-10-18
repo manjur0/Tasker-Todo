@@ -11,7 +11,7 @@ const TaskBoard = () => {
     description: "Learn React for 1 hour",
     tags: ["react", "frontend", "js"],
     priority: "low",
-    isFavourite: true,
+    isFavourite: true ,
   };
   // tasks state here
   const [tasks, setTasks] = useState([defualtTask]);
