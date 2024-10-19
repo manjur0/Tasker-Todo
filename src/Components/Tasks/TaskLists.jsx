@@ -1,3 +1,5 @@
+import { MdOutlineStar } from "react-icons/md";
+
 const TaskLists = ({ tasks }) => {
   return (
     <div className="overflow-auto">
@@ -33,7 +35,13 @@ const TaskLists = ({ tasks }) => {
               key={task.id}
               className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
             >
-              <td>{task.isFavourite ? "🌟" : ""}</td>
+              <td>
+                {task.isFavourite ? (
+                  <MdOutlineStar color="yellow" />
+                ) : (
+                  <MdOutlineStar color="gray" />
+                )}
+              </td>
               <td>{task.title}</td>
               <td>
                 <div>{task.description}</div>
