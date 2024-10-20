@@ -1,6 +1,6 @@
 import { MdOutlineStar } from "react-icons/md";
 
-const TaskLists = ({ tasks }) => {
+const TaskLists = ({ tasks, onDelete }) => {
   // check if tasks is an array and has length greater than 0
   const tasksToRender = Array.isArray(tasks) && tasks?.length > 0 ? tasks : [];
   return (
@@ -32,35 +32,40 @@ const TaskLists = ({ tasks }) => {
           </tr>
         </thead>
         <tbody>
-          {tasksToRender.map((task) => (
+          {tasksToRender.map((tasksToRender) => (
             <tr
-              key={task.id}
+              key={tasksToRender.id}
               className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
             >
               <td>
-                {task.isFavourite ? (
+                {tasksToRender.isFavourite ? (
                   <MdOutlineStar color="yellow" />
                 ) : (
                   <MdOutlineStar color="gray" />
                 )}
               </td>
-              <td>{task.title}</td>
+              <td>{tasksToRender.title}</td>
               <td>
-                <div>{task.description}</div>
+                <div>{tasksToRender.description}</div>
               </td>
               <td>
                 <ul className="flex justify-center gap-1.5 flex-wrap">
                   <li>
                     <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
-                      {task.tags.map((tag) => tag).join(", ")}
+                      {tasksToRender.tags.map((tag) => tag).join(", ")}
                     </span>
                   </li>
                 </ul>
               </td>
-              <td className="text-center">{task.priority}</td>
+              <td className="text-center">{tasksToRender.priority}</td>
               <td>
                 <div className="flex items-center justify-center space-x-3">
-                  <button className="text-red-500">Delete</button>
+                  <button
+                    onClick={() => onDelete(tasksToRender.id)}
+                    className="text-red-500"
+                  >
+                    Delete
+                  </button>
                   <button className="text-blue-500">Edit</button>
                 </div>
               </td>
