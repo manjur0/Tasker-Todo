@@ -1,6 +1,8 @@
 import { MdOutlineStar } from "react-icons/md";
 
 const TaskLists = ({ tasks }) => {
+  // check if tasks is an array and has length greater than 0
+  const tasksToRender = Array.isArray(tasks) && tasks?.length > 0 ? tasks : [];
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -30,7 +32,7 @@ const TaskLists = ({ tasks }) => {
           </tr>
         </thead>
         <tbody>
-          {tasks?.map((task) => (
+          {tasksToRender.map((task) => (
             <tr
               key={task.id}
               className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"

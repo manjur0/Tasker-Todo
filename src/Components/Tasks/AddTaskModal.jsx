@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const AddTaskModal = ({ onSave }) => {
   const [task, setTask] = useState({
+    id: crypto.randomUUID(),
     title: "",
     description: "",
     tags: [],
@@ -17,6 +18,7 @@ const AddTaskModal = ({ onSave }) => {
     if (name == "tags") {
       value = value.split(",");
     }
+
     setTask({
       ...task,
       [name]: value,

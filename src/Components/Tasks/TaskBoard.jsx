@@ -19,8 +19,12 @@ const TaskBoard = () => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   // Add Task Handler
-  const handleAddToTasks = (e) => {
-    console.log(e);
+  const handleAddToTasks = (newTask) => {
+    setTasks([...tasks, newTask]);
+    // clear form
+    setTasks({});
+    // close modal
+    setShowAddModal(false);
   };
 
   return (
