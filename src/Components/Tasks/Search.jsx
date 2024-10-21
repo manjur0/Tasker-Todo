@@ -1,6 +1,6 @@
-const Search = () => {
+const Search = ({ onSearch }) => {
   return (
-    <form>
+    <form onSubmit={onSearch}>
       <div className="flex">
         <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
           <input

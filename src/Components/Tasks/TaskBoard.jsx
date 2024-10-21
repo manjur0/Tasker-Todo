@@ -50,10 +50,37 @@ const TaskBoard = () => {
     setTasks(filteredTask);
     console.log(filteredTask);
   };
+  // Delete All Task Handler
+  const handleDeleteAll = () => {
+    setTasks([]);
+  };
   // Close Modal Handler
   const handleCloseModal = () => {
     setShowAddModal(false);
     setTaskToUpdate(null);
+  };
+
+  // is favourite handler
+  const handleIsFavourite = (taskId) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            isFavourite: !task.isFavourite,
+          };
+        }
+        return task;
+      })
+    );
+  };
+
+  // Search task handler
+  const handleSearchTask = (searchValue) => {
+    const filteredTask = tasks.filter((task) =>
+      task.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setTasks(filteredTask);
   };
 
   return (
@@ -68,16 +95,20 @@ const TaskBoard = () => {
 
       <div className="container">
         <div className="p-2 flex justify-end">
-          <Search />
+          <Search onSearch={handleSearchTask} />
         </div>
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskAction onAddClick={() => setShowAddModal(true)} />
+          <TaskAction
+            onAddClick={() => setShowAddModal(true)}
+            onDeleteAll={handleDeleteAll}
+          />
           {/* Task List */}
           {tasks.length > 0 ? (
             <TaskLists
               tasks={tasks}
               onEdit={handleEditTask}
               onDelete={handleDeleteTask}
+              onIsFavourite={handleIsFavourite}
             />
           ) : (
             <NoTaskFound />

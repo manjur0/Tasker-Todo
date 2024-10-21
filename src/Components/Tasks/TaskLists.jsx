@@ -1,6 +1,6 @@
 import { MdOutlineStar } from "react-icons/md";
 
-const TaskLists = ({ tasks, onEdit, onDelete }) => {
+const TaskLists = ({ tasks, onEdit, onDelete, onIsFavourite }) => {
   // check if tasks is an array and has length greater than 0
   const tasksToRender = Array.isArray(tasks) && tasks?.length > 0 ? tasks : [];
   return (
@@ -37,7 +37,10 @@ const TaskLists = ({ tasks, onEdit, onDelete }) => {
               key={tasksToRender.id}
               className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
             >
-              <td>
+              <td
+                className="cursor-pointer"
+                onClick={() => onIsFavourite(tasksToRender.id)}
+              >
                 {tasksToRender.isFavourite ? (
                   <MdOutlineStar color="yellow" />
                 ) : (
