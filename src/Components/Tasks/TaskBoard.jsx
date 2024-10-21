@@ -50,11 +50,20 @@ const TaskBoard = () => {
     setTasks(filteredTask);
     console.log(filteredTask);
   };
+  // Close Modal Handler
+  const handleCloseModal = () => {
+    setShowAddModal(false);
+    setTaskToUpdate(null);
+  };
 
   return (
     <section className="mb-20" id="tasks">
       {showAddModal && (
-        <AddTaskModal onSave={handleAddToTasks} taskToUpdate={taskToUpdate} />
+        <AddTaskModal
+          onSave={handleAddToTasks}
+          taskToUpdate={taskToUpdate}
+          onCloseModal={handleCloseModal}
+        />
       )}
 
       <div className="container">
