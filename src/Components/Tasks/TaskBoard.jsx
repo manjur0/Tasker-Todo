@@ -80,7 +80,7 @@ const TaskBoard = () => {
     const filteredTask = tasks.filter((task) =>
       task.title.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setTasks(filteredTask);
+    setTasks([...filteredTask]);
   };
 
   return (
