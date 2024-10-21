@@ -1,6 +1,6 @@
 import { MdOutlineStar } from "react-icons/md";
 
-const TaskLists = ({ tasks, onDelete }) => {
+const TaskLists = ({ tasks, onEdit, onDelete }) => {
   // check if tasks is an array and has length greater than 0
   const tasksToRender = Array.isArray(tasks) && tasks?.length > 0 ? tasks : [];
   return (
@@ -66,7 +66,12 @@ const TaskLists = ({ tasks, onDelete }) => {
                   >
                     Delete
                   </button>
-                  <button className="text-blue-500">Edit</button>
+                  <button
+                    onClick={() => onEdit(tasksToRender)}
+                    className="text-blue-500"
+                  >
+                    Edit
+                  </button>
                 </div>
               </td>
             </tr>

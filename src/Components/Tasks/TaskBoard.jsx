@@ -18,12 +18,30 @@ const TaskBoard = () => {
   // tasks state here
   const [tasks, setTasks] = useState([defualtTask]);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-  // Add Task Handler
-  const handleAddToTasks = (newTask) => {
-    setTasks([...tasks, newTask]);
+  // Add Task and Update Task Handler
+  const handleAddToTasks = (newTask, isAdd) => {
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === newTask.id) {
+            return newTask;
+          }
+          return task;
+        })
+      );
+    }
     // close modal
     setShowAddModal(false);
+  };
+
+  // Edit Task Handler
+  const handleEditTask = (editTask) => {
+    setTaskToUpdate(editTask);
+    setShowAddModal(true);
   };
 
   // Delete Task Handler
@@ -35,7 +53,9 @@ const TaskBoard = () => {
 
   return (
     <section className="mb-20" id="tasks">
-      {showAddModal && <AddTaskModal onSave={handleAddToTasks} />}
+      {showAddModal && (
+        <AddTaskModal onSave={handleAddToTasks} taskToUpdate={taskToUpdate} />
+      )}
 
       <div className="container">
         <div className="p-2 flex justify-end">
@@ -45,7 +65,11 @@ const TaskBoard = () => {
           <TaskAction onAddClick={() => setShowAddModal(true)} />
           {/* Task List */}
           {tasks.length > 0 ? (
-            <TaskLists tasks={tasks} onDelete={handleDeleteTask} />
+            <TaskLists
+              tasks={tasks}
+              onEdit={handleEditTask}
+              onDelete={handleDeleteTask}
+            />
           ) : (
             <NoTaskFound />
           )}
